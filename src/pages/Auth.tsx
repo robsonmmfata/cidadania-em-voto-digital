@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useUserRole } from "@/hooks/useUserRole";
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -12,6 +13,7 @@ export default function Auth() {
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { role, loading: roleLoading } = useUserRole();
 
   async function handleAuth(e: React.FormEvent) {
     e.preventDefault();
@@ -41,7 +43,8 @@ export default function Auth() {
         return;
       }
       toast({ title: "Bem-vindo!" });
-      navigate("/");
+      // Redirecionamento condicional: role pode precisar de tempo para carregar, aguarde via useEffect abaixo
+      // Não navega imediatamente aqui!
     }
     setLoading(false);
   }
@@ -53,6 +56,20 @@ export default function Auth() {
   // classes azul institucional p/ botão principal
   const buttonClass =
     "w-full mb-3 bg-institutional-blue text-white hover:bg-institutional-blue/90 transition-colors";
+
+  // Adiciona efeito para redirecionar após login, assim que papel for carregado
+  // Se for admin, manda para /admin
+  // Se for user, manda para /dashboard
+  // Obs: navega apenas se usuário logado e role carregada (não null)
+  useEffect(() => {
+    if (loading || roleLoading) return;
+    if (role === "admin") {
+      navigate("/admin");
+    } else if (role) {
+      navigate("/dashboard");
+    }
+    // else permanece na tela de auth
+  }, [role, roleLoading, loading, navigate]);
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-institutional-blue">
