@@ -56,7 +56,7 @@ export default function Auth() {
         {isSignUp && (
           <Input
             placeholder="Nome Completo"
-            className="mb-3"
+            className="mb-3 bg-white"
             required
             value={fullName}
             onChange={e => setFullName(e.target.value)}
@@ -64,7 +64,7 @@ export default function Auth() {
         )}
         <Input
           placeholder="E-mail"
-          className="mb-3"
+          className="mb-3 bg-white"
           type="email"
           required
           value={email}
@@ -72,7 +72,7 @@ export default function Auth() {
         />
         <Input
           placeholder="Senha"
-          className="mb-4"
+          className="mb-4 bg-white"
           type="password"
           required
           value={password}
