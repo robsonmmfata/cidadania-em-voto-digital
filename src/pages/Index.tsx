@@ -43,8 +43,7 @@ const Index = () => {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-institutional-blue/70 font-semibold py-4 px-8 transition-colors"
+                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold py-4 px-8 transition-colors"
               >
                 <Users className="mr-2 h-5 w-5" />
                 Ver Apuração
