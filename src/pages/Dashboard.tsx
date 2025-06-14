@@ -19,7 +19,7 @@ export default function Dashboard() {
   if (loading || !user) return null;
 
   return (
-    <section className="min-h-screen bg-institutional-blue/5 flex flex-col items-center py-10">
+    <section className="min-h-screen bg-institutional-gray flex flex-col items-center py-10">
       <h2 className="text-2xl font-bold text-institutional-blue mb-8">
         Minha Dashboard
       </h2>
