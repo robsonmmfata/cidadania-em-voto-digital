@@ -1,8 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface HeaderProps {
   onOpenRegisterModal: () => void;
