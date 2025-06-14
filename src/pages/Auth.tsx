@@ -47,6 +47,10 @@ export default function Auth() {
     setLoading(false);
   }
 
+  // cores padronizadas e modernas para todos os inputs
+  const inputClass =
+    "mb-3 bg-white border border-gray-300 placeholder:text-gray-500 focus:border-institutional-blue focus:ring-institutional-blue";
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-institutional-blue">
       <form className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm" onSubmit={handleAuth}>
@@ -56,7 +60,7 @@ export default function Auth() {
         {isSignUp && (
           <Input
             placeholder="Nome Completo"
-            className="mb-3 bg-white"
+            className={inputClass}
             required
             value={fullName}
             onChange={e => setFullName(e.target.value)}
@@ -64,7 +68,7 @@ export default function Auth() {
         )}
         <Input
           placeholder="E-mail"
-          className="mb-3 bg-white"
+          className={inputClass}
           type="email"
           required
           value={email}
@@ -72,7 +76,7 @@ export default function Auth() {
         />
         <Input
           placeholder="Senha"
-          className="mb-4 bg-white"
+          className={`mb-4 bg-white border border-gray-300 placeholder:text-gray-500 focus:border-institutional-blue focus:ring-institutional-blue`}
           type="password"
           required
           value={password}
