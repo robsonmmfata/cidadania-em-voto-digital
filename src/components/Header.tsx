@@ -1,9 +1,19 @@
+
 import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Handlers simples para demonstração
+  const handleEntrar = () => {
+    alert('Clique em Entrar');
+  };
+
+  const handleCadastrar = () => {
+    alert('Clique em Cadastrar');
+  };
 
   return (
     <header className="bg-institutional-blue shadow-sm border-b border-institutional-blue sticky top-0 z-50">
@@ -36,12 +46,14 @@ const Header = () => {
             <Button
               size="sm"
               className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+              onClick={handleEntrar}
             >
               Entrar
             </Button>
             <Button
               size="sm"
               className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+              onClick={handleCadastrar}
             >
               Cadastrar
             </Button>
@@ -83,12 +95,14 @@ const Header = () => {
               <Button
                 size="sm"
                 className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                onClick={handleEntrar}
               >
                 Entrar
               </Button>
               <Button
                 size="sm"
                 className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                onClick={handleCadastrar}
               >
                 Cadastrar
               </Button>
@@ -101,3 +115,4 @@ const Header = () => {
 };
 
 export default Header;
+
