@@ -34,9 +34,8 @@ const Header = () => {
               Como Funciona
             </a>
             <Button
-              variant="outline"
               size="sm"
-              className="border-white text-white hover:bg-institutional-blue/70 transition-colors"
+              className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
             >
               Entrar
             </Button>
@@ -82,9 +81,8 @@ const Header = () => {
             </a>
             <div className="flex space-x-2 px-4 pt-2">
               <Button
-                variant="outline"
                 size="sm"
-                className="flex-1 border-white text-white hover:bg-institutional-blue/70 transition-colors"
+                className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
               >
                 Entrar
               </Button>

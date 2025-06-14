@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -153,8 +152,7 @@ const CaseOverview = () => {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-institutional-blue/70 transition-colors"
+                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
               >
                 Ver Depoimentos dos Réus
               </Button>
