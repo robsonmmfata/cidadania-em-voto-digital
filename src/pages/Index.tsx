@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +18,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-institutional-blue">
       <Header />
-
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-institutional-blue text-white">
         <div className="absolute inset-0 bg-institutional-blue"></div>
@@ -35,18 +33,18 @@ const Index = () => {
               Simulação de votação popular sobre o julgamento dos réus no STF
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-              <Button 
-                size="lg" 
-                className="bg-white/10 text-white hover:bg-white/20 font-semibold py-4 px-8"
+              <Button
+                size="lg"
+                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold py-4 px-8 transition-colors"
                 onClick={() => setShowRegisterModal(true)}
               >
                 <Vote className="mr-2 h-5 w-5" />
                 Registrar Meu Voto
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white text-white hover:bg-white/10 font-semibold py-4 px-8"
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-institutional-blue/70 font-semibold py-4 px-8 transition-colors"
               >
                 <Users className="mr-2 h-5 w-5" />
                 Ver Apuração
@@ -55,7 +53,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="py-16 bg-institutional-blue/90">
         <div className="container mx-auto px-4">
@@ -167,9 +164,9 @@ const Index = () => {
             Participe desta consulta cidadã e contribua para o debate democrático sobre 
             um dos julgamentos mais importantes do país.
           </p>
-          <Button 
-            size="lg" 
-            className="bg-white/10 hover:bg-white/20 font-semibold py-4 px-8 text-white"
+          <Button
+            size="lg"
+            className="bg-white/10 hover:bg-institutional-blue/70 font-semibold py-4 px-8 text-white transition-colors"
             onClick={() => setShowRegisterModal(true)}
           >
             Começar Meu Cadastro
@@ -177,7 +174,6 @@ const Index = () => {
           </Button>
         </div>
       </section>
-
       <RegisterModal 
         open={showRegisterModal} 
         onOpenChange={setShowRegisterModal} 
@@ -187,4 +183,3 @@ const Index = () => {
 };
 
 export default Index;
-

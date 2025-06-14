@@ -29,7 +29,6 @@ const CaseOverview = () => {
               formação de organização criminosa e lavagem de dinheiro.
             </p>
           </div>
-
           {/* Case Summary */}
           <Card className="mb-8 card-institutional bg-institutional-blue/90 border border-white/10">
             <CardHeader>
@@ -145,11 +144,18 @@ const CaseOverview = () => {
           {/* Action Buttons */}
           <div className="text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white/10 hover:bg-white/20 text-white font-semibold">
+              <Button
+                size="lg"
+                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+              >
                 <FileText className="mr-2 h-5 w-5" />
                 Ler Detalhes Completos
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-institutional-blue/70 transition-colors"
+              >
                 Ver Depoimentos dos Réus
               </Button>
             </div>
@@ -159,6 +165,4 @@ const CaseOverview = () => {
     </section>
   );
 };
-
 export default CaseOverview;
-
