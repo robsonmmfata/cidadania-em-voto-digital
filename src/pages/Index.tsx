@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-institutional text-white">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -60,30 +60,30 @@ const Index = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="text-center card-institutional">
+            <Card className="text-center card-institutional bg-institutional-blue/10">
               <CardHeader>
                 <CardTitle className="text-3xl font-bold text-institutional-blue">
                   {totalVotes.toLocaleString()}
                 </CardTitle>
-                <CardDescription className="text-lg">Votos Registrados</CardDescription>
+                <CardDescription className="text-lg text-institutional-navy">Votos Registrados</CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="text-center card-institutional">
+            <Card className="text-center card-institutional bg-institutional-green/10">
               <CardHeader>
                 <CardTitle className="text-3xl font-bold text-institutional-green">
                   {registeredUsers.toLocaleString()}
                 </CardTitle>
-                <CardDescription className="text-lg">Cidadãos Cadastrados</CardDescription>
+                <CardDescription className="text-lg text-institutional-navy">Cidadãos Cadastrados</CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="text-center card-institutional">
+            <Card className="text-center card-institutional bg-institutional-navy/10">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold text-institutional-gold">
+                <CardTitle className="text-3xl font-bold text-institutional-navy">
                   8
                 </CardTitle>
-                <CardDescription className="text-lg">Réus em Julgamento</CardDescription>
+                <CardDescription className="text-lg text-institutional-navy">Réus em Julgamento</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -99,12 +99,12 @@ const Index = () => {
       {/* Security Notice */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto card-institutional">
+          <Card className="max-w-4xl mx-auto card-institutional bg-institutional-blue/10">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
                 <Shield className="h-12 w-12 text-institutional-blue" />
               </div>
-              <CardTitle className="text-2xl mb-2">Segurança e Transparência</CardTitle>
+              <CardTitle className="text-2xl mb-2 text-institutional-blue">Segurança e Transparência</CardTitle>
               <CardDescription className="text-lg">
                 Este sistema utiliza tecnologias avançadas de segurança
               </CardDescription>
@@ -115,7 +115,7 @@ const Index = () => {
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold">Validação por CPF e Título</h4>
+                      <h4 className="font-semibold text-institutional-navy">Validação por CPF e Título</h4>
                       <p className="text-sm text-muted-foreground">
                         Verificação automática dos dados eleitorais
                       </p>
@@ -124,7 +124,7 @@ const Index = () => {
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold">Criptografia de Dados</h4>
+                      <h4 className="font-semibold text-institutional-navy">Criptografia de Dados</h4>
                       <p className="text-sm text-muted-foreground">
                         Informações protegidas com algoritmos avançados
                       </p>
@@ -135,7 +135,7 @@ const Index = () => {
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold">Auditoria Completa</h4>
+                      <h4 className="font-semibold text-institutional-navy">Auditoria Completa</h4>
                       <p className="text-sm text-muted-foreground">
                         Logs detalhados de todas as operações
                       </p>
@@ -144,7 +144,7 @@ const Index = () => {
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold">Pagamento Seguro</h4>
+                      <h4 className="font-semibold text-institutional-navy">Pagamento Seguro</h4>
                       <p className="text-sm text-muted-foreground">
                         Validação via Pix com confirmação automática
                       </p>
