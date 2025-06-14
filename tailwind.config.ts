@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,11 +64,11 @@ export default {
 				},
 				// Brazilian institutional colors
 				institutional: {
-					blue: '#1E40AF',
-					green: '#059669',
-					gold: '#D97706',
-					navy: '#0F172A',
-					gray: '#64748B'
+					blue: '#2451B2',   // um azul mais suave
+					green: '#3CC88B',  // verde relaxante
+					gold: '#FFD880',   // dourado claro
+					navy: '#27314B',   // navy mais suave
+					gray: '#F4F6FB'    // fundo bem claro
 				}
 			},
 			borderRadius: {
