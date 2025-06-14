@@ -240,9 +240,8 @@ const RegisterModal = ({ open, onOpenChange }: RegisterModalProps) => {
 
             <div className="flex space-x-3">
               <Button 
-                variant="outline" 
                 onClick={() => setStep(1)}
-                className="flex-1 border-white text-white hover:bg-institutional-blue/70 hover:text-white transition-colors"
+                className="flex-1 border-white text-white bg-transparent hover:bg-institutional-blue/70 hover:text-white transition-colors"
               >
                 Voltar
               </Button>
