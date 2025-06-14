@@ -1,7 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
+import { useAuthSession } from "@/hooks/useAuthSession";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onOpenRegisterModal: () => void;
@@ -9,6 +10,8 @@ interface HeaderProps {
 
 const Header = ({ onOpenRegisterModal }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuthSession();
+  const navigate = useNavigate();
 
   return (
     <header className="bg-institutional-blue shadow-sm border-b border-institutional-blue sticky top-0 z-50">
@@ -37,20 +40,32 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             <a href="#como-funciona" className="text-white hover:text-blue-200 transition-colors">
               Como Funciona
             </a>
-            <Button
-              size="sm"
-              className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-              onClick={onOpenRegisterModal}
-            >
-              Entrar
-            </Button>
-            <Button
-              size="sm"
-              className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-              onClick={onOpenRegisterModal}
-            >
-              Cadastrar
-            </Button>
+            {!user ? (
+              <>
+                <Button
+                  size="sm"
+                  className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                  onClick={() => navigate("/auth")}
+                >
+                  Entrar
+                </Button>
+                <Button
+                  size="sm"
+                  className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                  onClick={() => navigate("/auth")}
+                >
+                  Cadastrar
+                </Button>
+              </>
+            ) : (
+              <Button
+                size="sm"
+                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                onClick={() => supabase.auth.signOut().then(() => navigate("/"))}
+              >
+                Sair
+              </Button>
+            )}
           </nav>
           {/* Mobile Menu Button */}
           <Button
