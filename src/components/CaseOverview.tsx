@@ -36,6 +36,7 @@ const CaseOverview = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-2xl flex items-center">
+                    {/* Alterar cor do ícone para azul institucional */}
                     <FileText className="mr-3 h-6 w-6 text-institutional-blue" />
                     Resumo do Caso
                   </CardTitle>
@@ -43,6 +44,7 @@ const CaseOverview = () => {
                     Operação Justiça Transparente - Processo nº 2024.STF.001234
                   </CardDescription>
                 </div>
+                {/* O Badge acima estava com ícone AlertTriangle verde/amarelo, agora ajustado */}
                 <Badge variant="default" className="text-sm bg-institutional-blue text-white">
                   <AlertTriangle className="mr-1 h-4 w-4 text-institutional-green" />
                   Alto Impacto
@@ -55,19 +57,19 @@ const CaseOverview = () => {
                   <h4 className="font-semibold mb-3 text-institutional-navy">Principais Acusações:</h4>
                   <ul className="space-y-2">
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-institutional-green rounded-full mr-3"></div>
                       <span>Corrupção ativa e passiva</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-institutional-green rounded-full mr-3"></div>
                       <span>Lavagem de dinheiro</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-institutional-green rounded-full mr-3"></div>
                       <span>Formação de organização criminosa</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-institutional-green rounded-full mr-3"></div>
                       <span>Peculato e evasão de divisas</span>
                     </li>
                   </ul>
@@ -159,4 +161,3 @@ const CaseOverview = () => {
 };
 
 export default CaseOverview;
-
