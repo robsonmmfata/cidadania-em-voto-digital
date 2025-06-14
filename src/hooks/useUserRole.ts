@@ -22,6 +22,7 @@ export function useUserRole() {
       .eq("user_id", user.id)
       .single()
       .then(({ data, error }) => {
+        console.log("[useUserRole] user_id:", user.id, "data:", data, "error:", error);
         if (error || !data) {
           setRole("user");
         } else {
