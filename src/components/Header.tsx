@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
@@ -104,4 +103,3 @@ const Header = () => {
 };
 
 export default Header;
-
