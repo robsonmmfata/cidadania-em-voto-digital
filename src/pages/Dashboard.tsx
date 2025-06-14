@@ -1,4 +1,3 @@
-
 import VotingPanel from "@/components/VotingPanel";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import ConfirmVoteModal from "@/components/ConfirmVoteModal";
 
 export default function Dashboard() {
   const { user, loading } = useAuthSession();
@@ -25,6 +25,7 @@ export default function Dashboard() {
   const [voteStatus, setVoteStatus] = useState<Record<string, string>>({});
   const [userVotes, setUserVotes] = useState<Record<string, string>>({});
   const [dataLoading, setDataLoading] = useState(true);
+  const [confirmVoteElection, setConfirmVoteElection] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -95,7 +96,7 @@ export default function Dashboard() {
     fetchUserVotes();
   }, [user, elections.length]);
 
-  // Handler de voto simplificado
+  // Handler de voto simplificado (agora chamado após confirmação)
   const handleVote = async (electionId: string) => {
     if (!user) {
       toast({ title: "Faça login antes de votar." });
@@ -105,7 +106,7 @@ export default function Dashboard() {
       toast({ title: "Selecione uma opção para votar!" });
       return;
     }
-    setVoteStatus(prev => ({ ...prev, [electionId]: "submitting" }));
+    setVoteStatus((prev) => ({ ...prev, [electionId]: "submitting" }));
     const { error } = await supabase.from("votes").insert({
       user_id: user.id,
       election_id: electionId,
@@ -113,12 +114,13 @@ export default function Dashboard() {
     });
     if (error) {
       toast({ title: "Erro ao votar", description: error.message });
-      setVoteStatus(prev => ({ ...prev, [electionId]: "error" }));
+      setVoteStatus((prev) => ({ ...prev, [electionId]: "error" }));
     } else {
-      setVoteStatus(prev => ({ ...prev, [electionId]: "voted" }));
-      setUserVotes(prev => ({ ...prev, [electionId]: selected[electionId] }));
+      setVoteStatus((prev) => ({ ...prev, [electionId]: "voted" }));
+      setUserVotes((prev) => ({ ...prev, [electionId]: selected[electionId] }));
       toast({ title: "Voto registrado!" });
     }
+    setConfirmVoteElection(null);
   };
 
   if (loading || profileLoading || dataLoading || !user) {
@@ -176,7 +178,7 @@ export default function Dashboard() {
                       ))}
                   </RadioGroup>
                   <Button
-                    onClick={() => handleVote(election.id)}
+                    onClick={() => setConfirmVoteElection(election.id)}
                     className="bg-institutional-blue text-white hover:bg-institutional-blue/90 w-full"
                     disabled={voteStatus[election.id] === "submitting"}
                   >
@@ -184,6 +186,20 @@ export default function Dashboard() {
                       ? "Enviando..."
                       : "Votar"}
                   </Button>
+                  <ConfirmVoteModal
+                    open={confirmVoteElection === election.id}
+                    onClose={() => setConfirmVoteElection(null)}
+                    onConfirm={() => handleVote(election.id)}
+                    optionLabel={
+                      selected[election.id]
+                        ? options[election.id]?.find(
+                            (o) => o.id === selected[election.id]
+                          )?.label
+                        : undefined
+                    }
+                    electionName={election.name}
+                    loading={voteStatus[election.id] === "submitting"}
+                  />
                 </>
               )}
             </CardContent>
