@@ -1,10 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useUserRole } from "@/hooks/useUserRole";
 
 interface HeaderProps {
   onOpenRegisterModal: () => void;
@@ -14,6 +14,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuthSession();
   const navigate = useNavigate();
+  const { role } = useUserRole();
 
   // Adicionando log para garantir execução do componente
   console.log("Header renderizou. user: ", user);
@@ -67,6 +68,22 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             <a href="#como-funciona" className="text-white hover:text-blue-200 transition-colors">
               Como Funciona
             </a>
+            {user && (
+              <a
+                href="/dashboard"
+                className="text-white hover:text-blue-200 font-bold transition-colors"
+              >
+                Minha Dashboard
+              </a>
+            )}
+            {user && role === "admin" && (
+              <a
+                href="/admin"
+                className="text-white hover:text-yellow-400 font-bold transition-colors"
+              >
+                Admin
+              </a>
+            )}
             {!user ? (
               <>
                 <Button
@@ -125,6 +142,22 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             >
               Como Funciona
             </a>
+            {user && (
+              <a
+                href="/dashboard"
+                className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
+              >
+                Minha Dashboard
+              </a>
+            )}
+            {user && role === "admin" && (
+              <a
+                href="/admin"
+                className="block px-4 py-2 text-yellow-400 hover:bg-institutional-blue/70 rounded transition-colors font-bold"
+              >
+                Admin
+              </a>
+            )}
             <div className="flex space-x-2 px-4 pt-2">
               <Button
                 size="sm"
