@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import CaseOverview from "@/components/CaseOverview";
 import VotingResults from "@/components/VotingResults";
 import RegisterModal from "@/components/RegisterModal";
+import VotingPanel from "@/components/VotingPanel";
 
 const Index = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -177,6 +178,7 @@ const Index = () => {
         open={showRegisterModal} 
         onOpenChange={setShowRegisterModal} 
       />
+      <VotingPanel />
     </div>
   );
 };
