@@ -15,6 +15,31 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
   const { user } = useAuthSession();
   const navigate = useNavigate();
 
+  // Adicionando log para garantir execução do componente
+  console.log("Header renderizou. user: ", user);
+
+  let renderError = false;
+  let renderErrorMessage = "";
+
+  try {
+    // apenas um teste para garantir que navegação, session, etc, não quebra
+    if (typeof navigate !== "function") {
+      renderError = true;
+      renderErrorMessage = "Problema com useNavigate.";
+    }
+  } catch (err) {
+    renderError = true;
+    renderErrorMessage = "Erro ao renderizar Header: " + (err instanceof Error ? err.message : err);
+  }
+
+  if (renderError) {
+    return (
+      <div className="bg-red-600 text-white p-3 text-center">
+        Erro ao renderizar Header: {renderErrorMessage}
+      </div>
+    );
+  }
+
   return (
     <header className="bg-institutional-blue shadow-sm border-b border-institutional-blue sticky top-0 z-50">
       <div className="container mx-auto px-4">
