@@ -70,7 +70,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             </a>
             {user && (
               <a
-                href="/dashboard"
+                href={role === "admin" ? "/admin" : "/dashboard"}
                 className="text-white hover:text-blue-200 font-bold transition-colors"
               >
                 Minha Dashboard
@@ -144,7 +144,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             </a>
             {user && (
               <a
-                href="/dashboard"
+                href={role === "admin" ? "/admin" : "/dashboard"}
                 className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
               >
                 Minha Dashboard
