@@ -1,15 +1,16 @@
+
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
+import AdminPanel from "@/components/AdminPanel";
 
 export default function AdminDashboard() {
   const { user, loading: userLoading } = useAuthSession();
   const { role, loading: roleLoading } = useUserRole();
   const navigate = useNavigate();
 
-  // Redireciona somente se terminou de carregar e role é diferente de "admin"
   useEffect(() => {
     if (!userLoading && !user) {
       toast({ title: "Precisa estar autenticado para acessar o painel administrativo." });
@@ -31,14 +32,11 @@ export default function AdminDashboard() {
   return (
     <section className="min-h-screen bg-institutional-gold flex flex-col items-center py-10">
       <h2 className="text-2xl font-bold text-institutional-blue mb-8">
-        Admin Dashboard
+        Painel do Administrador
       </h2>
-      <div className="text-institutional-blue text-lg mb-6">Bem-vindo(a), administrador!</div>
-      <div>
-        {/* Espaço para admins criarem/manterem julgamentos etc */}
-        <div className="text-institutional-blue/80 mb-4">
-          (Em breve: painel de criação e gestão de julgamentos)
-        </div>
+      <div className="text-institutional-blue text-lg mb-8">Bem-vindo(a), administrador!</div>
+      <div className="w-full flex flex-col items-center">
+        <AdminPanel />
       </div>
     </section>
   );
