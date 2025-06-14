@@ -99,16 +99,16 @@ const VotingResults = () => {
               </CardHeader>
             </Card>
             
-            <Card className="card-institutional text-center bg-institutional-gold/10 border-none shadow-lg">
+            <Card className="card-institutional text-center bg-institutional-green/10 border-none shadow-lg">
               <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold text-institutional-gold">
+                <CardTitle className="text-2xl font-bold text-institutional-blue">
                   26.8%
                 </CardTitle>
                 <CardDescription className="text-institutional-navy/70">Média Absolvição</CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="card-institutional text-center bg-institutional-green/10 border-none shadow-lg">
+            <Card className="card-institutional text-center bg-institutional-navy/10 border-none shadow-lg">
               <CardHeader className="pb-3">
                 <CardTitle className="text-2xl font-bold text-institutional-navy">
                   8/8
@@ -125,7 +125,7 @@ const VotingResults = () => {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-institutional-gold/50 to-institutional-blue/30 rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-gradient-to-br from-institutional-blue/30 to-institutional-green/30 rounded-full flex items-center justify-center">
                         <span className="text-base font-bold text-institutional-navy">
                           {defendant.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </span>
@@ -230,3 +230,4 @@ const VotingResults = () => {
 };
 
 export default VotingResults;
+
