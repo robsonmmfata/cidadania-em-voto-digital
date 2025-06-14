@@ -17,18 +17,18 @@ const Index = () => {
   const registeredUsers = 18492;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-institutional-blue">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-institutional text-white">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section className="relative overflow-hidden bg-institutional-blue text-white">
+        <div className="absolute inset-0 bg-institutional-blue"></div>
         <div className="relative container mx-auto px-4 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <Scale className="h-16 w-16 text-white/90" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in text-white">
               Urna Eletrônica Cidadã
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in">
@@ -37,7 +37,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
               <Button 
                 size="lg" 
-                className="bg-white text-institutional-blue hover:bg-white/90 font-semibold py-4 px-8"
+                className="bg-white/10 text-white hover:bg-white/20 font-semibold py-4 px-8"
                 onClick={() => setShowRegisterModal(true)}
               >
                 <Vote className="mr-2 h-5 w-5" />
@@ -46,7 +46,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-institutional-blue font-semibold py-4 px-8"
+                className="border-white text-white hover:bg-white/10 font-semibold py-4 px-8"
               >
                 <Users className="mr-2 h-5 w-5" />
                 Ver Apuração
@@ -57,33 +57,33 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-institutional-blue/90">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="text-center card-institutional bg-institutional-blue/10">
+            <Card className="text-center card-institutional bg-institutional-blue/80 border-none">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold text-institutional-blue">
+                <CardTitle className="text-3xl font-bold text-white">
                   {totalVotes.toLocaleString()}
                 </CardTitle>
-                <CardDescription className="text-lg text-institutional-navy">Votos Registrados</CardDescription>
+                <CardDescription className="text-lg text-blue-100">Votos Registrados</CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="text-center card-institutional bg-institutional-green/10">
+            <Card className="text-center card-institutional bg-institutional-blue/80 border-none">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold text-institutional-green">
+                <CardTitle className="text-3xl font-bold text-white">
                   {registeredUsers.toLocaleString()}
                 </CardTitle>
-                <CardDescription className="text-lg text-institutional-navy">Cidadãos Cadastrados</CardDescription>
+                <CardDescription className="text-lg text-blue-100">Cidadãos Cadastrados</CardDescription>
               </CardHeader>
             </Card>
             
-            <Card className="text-center card-institutional bg-institutional-navy/10">
+            <Card className="text-center card-institutional bg-institutional-blue/80 border-none">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold text-institutional-navy">
+                <CardTitle className="text-3xl font-bold text-white">
                   8
                 </CardTitle>
-                <CardDescription className="text-lg text-institutional-navy">Réus em Julgamento</CardDescription>
+                <CardDescription className="text-lg text-blue-100">Réus em Julgamento</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -97,15 +97,15 @@ const Index = () => {
       <VotingResults />
 
       {/* Security Notice */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-institutional-blue">
         <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto card-institutional bg-institutional-blue/10">
+          <Card className="max-w-4xl mx-auto card-institutional bg-institutional-blue/90 border border-white/10">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <Shield className="h-12 w-12 text-institutional-blue" />
+                <Shield className="h-12 w-12 text-white" />
               </div>
-              <CardTitle className="text-2xl mb-2 text-institutional-blue">Segurança e Transparência</CardTitle>
-              <CardDescription className="text-lg">
+              <CardTitle className="text-2xl mb-2 text-white">Segurança e Transparência</CardTitle>
+              <CardDescription className="text-lg text-blue-100">
                 Este sistema utiliza tecnologias avançadas de segurança
               </CardDescription>
             </CardHeader>
@@ -113,19 +113,19 @@ const Index = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-institutional-navy">Validação por CPF e Título</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <h4 className="font-semibold text-white">Validação por CPF e Título</h4>
+                      <p className="text-sm text-blue-100">
                         Verificação automática dos dados eleitorais
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-institutional-navy">Criptografia de Dados</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <h4 className="font-semibold text-white">Criptografia de Dados</h4>
+                      <p className="text-sm text-blue-100">
                         Informações protegidas com algoritmos avançados
                       </p>
                     </div>
@@ -133,19 +133,19 @@ const Index = () => {
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-institutional-navy">Auditoria Completa</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <h4 className="font-semibold text-white">Auditoria Completa</h4>
+                      <p className="text-sm text-blue-100">
                         Logs detalhados de todas as operações
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-institutional-green rounded-full mt-2"></div>
+                    <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-institutional-navy">Pagamento Seguro</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <h4 className="font-semibold text-white">Pagamento Seguro</h4>
+                      <p className="text-sm text-blue-100">
                         Validação via Pix com confirmação automática
                       </p>
                     </div>
@@ -158,18 +158,18 @@ const Index = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-institutional-navy text-white">
+      <section className="py-20 bg-institutional-blue text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Sua Opinião É Importante
           </h2>
-          <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
             Participe desta consulta cidadã e contribua para o debate democrático sobre 
             um dos julgamentos mais importantes do país.
           </p>
           <Button 
             size="lg" 
-            className="bg-institutional-green hover:bg-institutional-green/90 font-semibold py-4 px-8"
+            className="bg-white/10 hover:bg-white/20 font-semibold py-4 px-8 text-white"
             onClick={() => setShowRegisterModal(true)}
           >
             Começar Meu Cadastro
@@ -187,3 +187,4 @@ const Index = () => {
 };
 
 export default Index;
+
