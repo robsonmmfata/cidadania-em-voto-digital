@@ -1,4 +1,3 @@
-
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -243,7 +242,7 @@ const RegisterModal = ({ open, onOpenChange }: RegisterModalProps) => {
               <Button 
                 variant="outline" 
                 onClick={() => setStep(1)}
-                className="flex-1 border-white text-white hover:bg-institutional-blue/70"
+                className="flex-1 border-white text-white hover:bg-institutional-blue/70 hover:text-white transition-colors"
               >
                 Voltar
               </Button>
@@ -288,7 +287,7 @@ const RegisterModal = ({ open, onOpenChange }: RegisterModalProps) => {
               <Button 
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="flex-1 border-white text-white hover:bg-institutional-blue/70"
+                className="flex-1 border-white text-white hover:bg-institutional-blue/70 hover:text-white transition-colors"
               >
                 Fechar
               </Button>
@@ -310,4 +309,3 @@ const RegisterModal = ({ open, onOpenChange }: RegisterModalProps) => {
 };
 
 export default RegisterModal;
-
