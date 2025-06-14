@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -51,6 +50,10 @@ export default function Auth() {
   const inputClass =
     "mb-3 bg-white border border-gray-300 placeholder:text-gray-500 focus:border-institutional-blue focus:ring-institutional-blue";
 
+  // classes azul institucional p/ botão principal
+  const buttonClass =
+    "w-full mb-3 bg-institutional-blue text-white hover:bg-institutional-blue/90 transition-colors";
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-institutional-blue">
       <form className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm" onSubmit={handleAuth}>
@@ -83,7 +86,7 @@ export default function Auth() {
           onChange={e => setPassword(e.target.value)}
         />
         <Button
-          className="w-full mb-3"
+          className={buttonClass}
           type="submit"
           disabled={loading}
         >
