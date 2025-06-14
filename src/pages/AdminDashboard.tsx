@@ -1,4 +1,3 @@
-
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { useEffect } from "react";
@@ -30,21 +29,11 @@ export default function AdminDashboard() {
   }
 
   return (
-    <section className="min-h-screen bg-institutional-blue/5 flex flex-col items-center py-10">
+    <section className="min-h-screen bg-institutional-gold flex flex-col items-center py-10">
       <h2 className="text-2xl font-bold text-institutional-blue mb-8">
         Admin Dashboard
       </h2>
       <div className="text-institutional-blue text-lg mb-6">Bem-vindo(a), administrador!</div>
-      <div className="mb-6 text-xs text-gray-500">
-        <span>DEBUG: </span>
-        <pre>
-          {JSON.stringify({
-            userId: user.id,
-            email: user.email,
-            role,
-          }, null, 2)}
-        </pre>
-      </div>
       <div>
         {/* Espaço para admins criarem/manterem julgamentos etc */}
         <div className="text-institutional-blue/80 mb-4">
