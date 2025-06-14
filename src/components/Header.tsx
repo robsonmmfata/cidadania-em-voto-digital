@@ -3,17 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Scale, Menu } from "lucide-react";
 import { useState } from "react";
 
-const Header = () => {
+interface HeaderProps {
+  onOpenRegisterModal: () => void;
+}
+
+const Header = ({ onOpenRegisterModal }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Handlers simples para demonstração
-  const handleEntrar = () => {
-    alert('Clique em Entrar');
-  };
-
-  const handleCadastrar = () => {
-    alert('Clique em Cadastrar');
-  };
 
   return (
     <header className="bg-institutional-blue shadow-sm border-b border-institutional-blue sticky top-0 z-50">
@@ -31,7 +26,6 @@ const Header = () => {
               </p>
             </div>
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#caso" className="text-white hover:text-blue-200 transition-colors">
@@ -46,19 +40,18 @@ const Header = () => {
             <Button
               size="sm"
               className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-              onClick={handleEntrar}
+              onClick={onOpenRegisterModal}
             >
               Entrar
             </Button>
             <Button
               size="sm"
               className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-              onClick={handleCadastrar}
+              onClick={onOpenRegisterModal}
             >
               Cadastrar
             </Button>
           </nav>
-
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -69,7 +62,6 @@ const Header = () => {
             <Menu className="h-5 w-5" />
           </Button>
         </div>
-
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-institutional-blue bg-institutional-blue py-4 space-y-2">
@@ -95,14 +87,20 @@ const Header = () => {
               <Button
                 size="sm"
                 className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-                onClick={handleEntrar}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenRegisterModal();
+                }}
               >
                 Entrar
               </Button>
               <Button
                 size="sm"
                 className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
-                onClick={handleCadastrar}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenRegisterModal();
+                }}
               >
                 Cadastrar
               </Button>
@@ -115,4 +113,3 @@ const Header = () => {
 };
 
 export default Header;
-

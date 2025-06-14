@@ -17,7 +17,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-institutional-blue">
-      <Header />
+      <Header onOpenRegisterModal={() => setShowRegisterModal(true)} />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-institutional-blue text-white">
         <div className="absolute inset-0 bg-institutional-blue"></div>
