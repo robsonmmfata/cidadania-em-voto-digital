@@ -43,8 +43,8 @@ const CaseOverview = () => {
                     Operação Justiça Transparente - Processo nº 2024.STF.001234
                   </CardDescription>
                 </div>
-                <Badge variant="destructive" className="text-sm">
-                  <AlertTriangle className="mr-1 h-4 w-4" />
+                <Badge variant="default" className="text-sm bg-institutional-blue text-white">
+                  <AlertTriangle className="mr-1 h-4 w-4 text-institutional-green" />
                   Alto Impacto
                 </Badge>
               </div>
@@ -55,19 +55,19 @@ const CaseOverview = () => {
                   <h4 className="font-semibold mb-3 text-institutional-navy">Principais Acusações:</h4>
                   <ul className="space-y-2">
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                       <span>Corrupção ativa e passiva</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                       <span>Lavagem de dinheiro</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                       <span>Formação de organização criminosa</span>
                     </li>
                     <li className="flex items-center">
-                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
                       <span>Peculato e evasão de divisas</span>
                     </li>
                   </ul>
@@ -111,7 +111,7 @@ const CaseOverview = () => {
               {defendants.map((defendant, index) => (
                 <Card key={index} className="card-institutional hover:shadow-lg transition-shadow">
                   <CardHeader className="pb-3">
-                    <div className="w-16 h-16 bg-gradient-to-br from-slate-200 to-slate-300 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-institutional-blue/20 to-institutional-green/20 rounded-full mx-auto mb-3 flex items-center justify-center">
                       <span className="text-xl font-bold text-slate-600">
                         {defendant.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                       </span>
@@ -121,7 +121,7 @@ const CaseOverview = () => {
                     </CardTitle>
                     <Badge 
                       variant={defendant.status === "Réu Principal" ? "destructive" : "secondary"}
-                      className="mx-auto"
+                      className={`mx-auto ${defendant.status === "Réu Principal" ? "bg-institutional-blue text-white" : ""}`}
                     >
                       {defendant.status}
                     </Badge>
@@ -159,3 +159,4 @@ const CaseOverview = () => {
 };
 
 export default CaseOverview;
+
