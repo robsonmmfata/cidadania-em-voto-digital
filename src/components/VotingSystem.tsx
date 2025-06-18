@@ -36,14 +36,23 @@ export default function VotingSystem() {
   useEffect(() => {
     const fetchElections = async () => {
       setLoading(true);
+      
+      // Buscar todas as eleições para debug
+      const { data: allElections, error: allError } = await supabase
+        .from("elections")
+        .select("*");
+      
+      console.log("Todas as eleições no banco:", allElections);
+      console.log("Erro ao buscar eleições:", allError);
+      
+      // Buscar eleições ativas (ajustando a lógica de data)
       const nowISO = new Date().toISOString();
+      console.log("Data atual:", nowISO);
       
       const { data: electionsData, error } = await supabase
         .from("elections")
         .select("*")
-        .lte("starts_at", nowISO)
-        .gte("ends_at", nowISO)
-        .order("ends_at", { ascending: true });
+        .order("created_at", { ascending: false });
 
       if (error) {
         console.error("Erro ao carregar votações:", error);
@@ -52,6 +61,7 @@ export default function VotingSystem() {
         return;
       }
 
+      console.log("Eleições encontradas:", electionsData);
       setElections(electionsData || []);
 
       // Carregar opções das votações
@@ -66,6 +76,7 @@ export default function VotingSystem() {
           console.error("Erro ao carregar opções:", optionError);
           toast({ title: "Erro ao carregar opções de voto", description: optionError.message });
         } else {
+          console.log("Opções carregadas:", optionData);
           // Agrupar opções por eleição
           const grouped: Record<string, Option[]> = {};
           optionData?.forEach(opt => {
@@ -153,6 +164,9 @@ export default function VotingSystem() {
           <p className="text-institutional-navy/70">
             No momento não há votações em andamento. Volte mais tarde para participar!
           </p>
+          <p className="text-sm text-red-500 mt-2">
+            Debug: {elections.length} votações encontradas
+          </p>
         </div>
       </div>
     );
@@ -166,6 +180,9 @@ export default function VotingSystem() {
         </h2>
         <p className="text-institutional-navy/70">
           Participe das votações ativas e faça sua voz ser ouvida!
+        </p>
+        <p className="text-sm text-green-600">
+          {elections.length} votações disponíveis
         </p>
       </div>
 
