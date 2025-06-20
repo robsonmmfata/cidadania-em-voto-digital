@@ -26,15 +26,15 @@ export default function AdminDashboard() {
   }, [role, roleLoading, navigate]);
 
   if (userLoading || roleLoading || !user) {
-    return <div className="text-center text-institutional-blue py-12">Carregando sua dashboard...</div>;
+    return <div className="text-center text-gray-600 py-12 bg-white min-h-screen">Carregando sua dashboard...</div>;
   }
 
   return (
-    <section className="min-h-screen bg-institutional-gold flex flex-col items-center py-10">
-      <h2 className="text-2xl font-bold text-institutional-blue mb-8">
+    <section className="min-h-screen bg-white flex flex-col items-center py-10">
+      <h2 className="text-2xl font-bold text-gray-900 mb-8">
         Painel do Administrador
       </h2>
-      <div className="text-institutional-blue text-lg mb-8">Bem-vindo(a), administrador!</div>
+      <div className="text-gray-700 text-lg mb-8">Bem-vindo(a), administrador!</div>
       <div className="w-full flex flex-col items-center">
         <AdminPanel />
       </div>

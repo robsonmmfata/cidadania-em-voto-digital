@@ -122,67 +122,71 @@ export default function ElectionManagement() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-institutional-navy">Gerenciamento de Votações</h3>
-        <Button onClick={() => setShowForm(true)} className="bg-institutional-blue hover:bg-institutional-blue/90">
+        <h3 className="text-lg font-semibold text-gray-900">Gerenciamento de Votações</h3>
+        <Button onClick={() => setShowForm(true)} className="bg-gray-800 hover:bg-gray-700 text-white">
           <Plus className="h-4 w-4 mr-2" />
           Nova Votação
         </Button>
       </div>
 
       {showForm && (
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardHeader>
-            <CardTitle>{editingElection ? "Editar Votação" : "Nova Votação"}</CardTitle>
+            <CardTitle className="text-gray-900">{editingElection ? "Editar Votação" : "Nova Votação"}</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Nome da Votação *</label>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Nome da Votação *</label>
                 <Input
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Ex: Presidente do Brasil 2024"
                   required
+                  className="bg-white border-gray-300"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Descrição</label>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Descrição</label>
                 <Textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Descrição da votação..."
                   rows={3}
+                  className="bg-white border-gray-300"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Data/Hora de Início *</label>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">Data/Hora de Início *</label>
                   <Input
                     type="datetime-local"
                     value={formData.starts_at}
                     onChange={(e) => setFormData({ ...formData, starts_at: e.target.value })}
                     required
+                    className="bg-white border-gray-300"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Data/Hora de Fim *</label>
+                  <label className="block text-sm font-medium mb-1 text-gray-700">Data/Hora de Fim *</label>
                   <Input
                     type="datetime-local"
                     value={formData.ends_at}
                     onChange={(e) => setFormData({ ...formData, ends_at: e.target.value })}
                     required
+                    className="bg-white border-gray-300"
                   />
                 </div>
               </div>
 
               <div className="flex gap-2">
-                <Button type="submit" className="bg-institutional-blue hover:bg-institutional-blue/90">
+                <Button type="submit" className="bg-gray-800 hover:bg-gray-700 text-white">
                   {editingElection ? "Atualizar" : "Criar"} Votação
                 </Button>
-                <Button type="button" variant="outline" onClick={resetForm}>
+                <Button type="button" variant="outline" onClick={resetForm} className="border-gray-300 text-gray-700">
                   Cancelar
                 </Button>
               </div>
@@ -191,37 +195,38 @@ export default function ElectionManagement() {
         </Card>
       )}
 
-      <Card>
+      <Card className="bg-white border border-gray-200">
         <CardHeader>
-          <CardTitle>Votações Existentes</CardTitle>
+          <CardTitle className="text-gray-900">Votações Existentes</CardTitle>
         </CardHeader>
         <CardContent>
           {elections.length === 0 ? (
-            <p className="text-muted-foreground">Nenhuma votação encontrada.</p>
+            <p className="text-gray-600">Nenhuma votação encontrada.</p>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Nome</TableHead>
-                  <TableHead>Descrição</TableHead>
-                  <TableHead>Início</TableHead>
-                  <TableHead>Fim</TableHead>
-                  <TableHead>Ações</TableHead>
+                  <TableHead className="text-gray-700">Nome</TableHead>
+                  <TableHead className="text-gray-700">Descrição</TableHead>
+                  <TableHead className="text-gray-700">Início</TableHead>
+                  <TableHead className="text-gray-700">Fim</TableHead>
+                  <TableHead className="text-gray-700">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {elections.map((election) => (
                   <TableRow key={election.id}>
-                    <TableCell className="font-medium">{election.name}</TableCell>
-                    <TableCell>{election.description || "—"}</TableCell>
-                    <TableCell>{new Date(election.starts_at).toLocaleString('pt-BR')}</TableCell>
-                    <TableCell>{new Date(election.ends_at).toLocaleString('pt-BR')}</TableCell>
+                    <TableCell className="font-medium text-gray-900">{election.name}</TableCell>
+                    <TableCell className="text-gray-700">{election.description || "—"}</TableCell>
+                    <TableCell className="text-gray-700">{new Date(election.starts_at).toLocaleString('pt-BR')}</TableCell>
+                    <TableCell className="text-gray-700">{new Date(election.ends_at).toLocaleString('pt-BR')}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => handleEdit(election)}
+                          className="border-gray-300 text-gray-700"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -229,6 +234,7 @@ export default function ElectionManagement() {
                           size="sm"
                           variant="outline"
                           onClick={() => handleDelete(election.id)}
+                          className="border-gray-300 text-gray-700"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>

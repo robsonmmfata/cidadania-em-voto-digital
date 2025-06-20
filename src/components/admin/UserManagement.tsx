@@ -99,7 +99,7 @@ export default function UserManagement() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-institutional-blue">Carregando usuários...</div>
+        <div className="text-gray-600">Carregando usuários...</div>
       </div>
     );
   }
@@ -107,79 +107,79 @@ export default function UserManagement() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <Users className="h-5 w-5 text-institutional-blue" />
-        <h3 className="text-lg font-semibold text-institutional-navy">Gerenciamento de Usuários</h3>
+        <Users className="h-5 w-5 text-gray-600" />
+        <h3 className="text-lg font-semibold text-gray-900">Gerenciamento de Usuários</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-blue-600" />
+              <Users className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{users.length}</p>
-                <p className="text-sm text-muted-foreground">Total de Usuários</p>
+                <p className="text-2xl font-bold text-gray-900">{users.length}</p>
+                <p className="text-sm text-gray-600">Total de Usuários</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <Crown className="h-4 w-4 text-yellow-600" />
+              <Crown className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{users.filter(u => u.role === "admin").length}</p>
-                <p className="text-sm text-muted-foreground">Administradores</p>
+                <p className="text-2xl font-bold text-gray-900">{users.filter(u => u.role === "admin").length}</p>
+                <p className="text-sm text-gray-600">Administradores</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <User className="h-4 w-4 text-green-600" />
+              <User className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{users.filter(u => u.role === "user").length}</p>
-                <p className="text-sm text-muted-foreground">Usuários Comuns</p>
+                <p className="text-2xl font-bold text-gray-900">{users.filter(u => u.role === "user").length}</p>
+                <p className="text-sm text-gray-600">Usuários Comuns</p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
+      <Card className="bg-white border border-gray-200">
         <CardHeader>
-          <CardTitle>Lista de Usuários</CardTitle>
+          <CardTitle className="text-gray-900">Lista de Usuários</CardTitle>
         </CardHeader>
         <CardContent>
           {users.length === 0 ? (
-            <p className="text-muted-foreground">Nenhum usuário encontrado.</p>
+            <p className="text-gray-600">Nenhum usuário encontrado.</p>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Nome</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Data de Cadastro</TableHead>
-                  <TableHead>Ações</TableHead>
+                  <TableHead className="text-gray-700">Nome</TableHead>
+                  <TableHead className="text-gray-700">Email</TableHead>
+                  <TableHead className="text-gray-700">Role</TableHead>
+                  <TableHead className="text-gray-700">Data de Cadastro</TableHead>
+                  <TableHead className="text-gray-700">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user.id}>
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium text-gray-900">
                       {user.full_name || "Nome não informado"}
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell className="text-gray-700">{user.email}</TableCell>
                     <TableCell>
-                      <Badge variant={user.role === "admin" ? "default" : "secondary"}>
+                      <Badge variant={user.role === "admin" ? "default" : "secondary"} className="bg-gray-100 text-gray-800">
                         {user.role === "admin" ? "Admin" : "Usuário"}
                       </Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="text-gray-700">
                       {new Date(user.created_at).toLocaleDateString('pt-BR')}
                     </TableCell>
                     <TableCell>
@@ -187,10 +187,10 @@ export default function UserManagement() {
                         value={user.role || "user"}
                         onValueChange={(value: "admin" | "user") => updateUserRole(user.id, value)}
                       >
-                        <SelectTrigger className="w-32">
+                        <SelectTrigger className="w-32 bg-white border-gray-300">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-white border-gray-300">
                           <SelectItem value="user">Usuário</SelectItem>
                           <SelectItem value="admin">Admin</SelectItem>
                         </SelectContent>

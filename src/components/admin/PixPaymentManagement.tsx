@@ -60,13 +60,13 @@ export default function PixPaymentManagement() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending":
-        return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">Pendente</Badge>;
+        return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 border-yellow-200">Pendente</Badge>;
       case "completed":
-        return <Badge variant="default" className="bg-green-100 text-green-800">Concluído</Badge>;
+        return <Badge variant="default" className="bg-green-100 text-green-800 border-green-200">Concluído</Badge>;
       case "failed":
-        return <Badge variant="destructive">Falhado</Badge>;
+        return <Badge variant="destructive" className="bg-red-100 text-red-800 border-red-200">Falhado</Badge>;
       default:
-        return <Badge variant="outline">{status}</Badge>;
+        return <Badge variant="outline" className="bg-gray-100 text-gray-800">{status}</Badge>;
     }
   };
 
@@ -80,7 +80,7 @@ export default function PixPaymentManagement() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-institutional-blue">Carregando pagamentos...</div>
+        <div className="text-gray-600">Carregando pagamentos...</div>
       </div>
     );
   }
@@ -88,95 +88,95 @@ export default function PixPaymentManagement() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <CreditCard className="h-5 w-5 text-institutional-blue" />
-        <h3 className="text-lg font-semibold text-institutional-navy">Gerenciamento de Pagamentos PIX</h3>
+        <CreditCard className="h-5 w-5 text-gray-600" />
+        <h3 className="text-lg font-semibold text-gray-900">Gerenciamento de Pagamentos PIX</h3>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <DollarSign className="h-4 w-4 text-green-600" />
+              <DollarSign className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">R$ {totalAmount.toFixed(2)}</p>
-                <p className="text-sm text-muted-foreground">Total Recebido</p>
+                <p className="text-2xl font-bold text-gray-900">R$ {totalAmount.toFixed(2)}</p>
+                <p className="text-sm text-gray-600">Total Recebido</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-green-600" />
+              <CheckCircle className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{completedPayments}</p>
-                <p className="text-sm text-muted-foreground">Concluídos</p>
+                <p className="text-2xl font-bold text-gray-900">{completedPayments}</p>
+                <p className="text-sm text-gray-600">Concluídos</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-yellow-600" />
+              <Clock className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{pendingPayments}</p>
-                <p className="text-sm text-muted-foreground">Pendentes</p>
+                <p className="text-2xl font-bold text-gray-900">{pendingPayments}</p>
+                <p className="text-sm text-gray-600">Pendentes</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white border border-gray-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2">
-              <CreditCard className="h-4 w-4 text-blue-600" />
+              <CreditCard className="h-4 w-4 text-gray-600" />
               <div>
-                <p className="text-2xl font-bold">{payments.length}</p>
-                <p className="text-sm text-muted-foreground">Total de Pagamentos</p>
+                <p className="text-2xl font-bold text-gray-900">{payments.length}</p>
+                <p className="text-sm text-gray-600">Total de Pagamentos</p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
+      <Card className="bg-white border border-gray-200">
         <CardHeader>
-          <CardTitle>Lista de Pagamentos</CardTitle>
+          <CardTitle className="text-gray-900">Lista de Pagamentos</CardTitle>
         </CardHeader>
         <CardContent>
           {payments.length === 0 ? (
-            <p className="text-muted-foreground">Nenhum pagamento encontrado.</p>
+            <p className="text-gray-600">Nenhum pagamento encontrado.</p>
           ) : (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Valor</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Data</TableHead>
-                  <TableHead>Usuário</TableHead>
-                  <TableHead>Ações</TableHead>
+                  <TableHead className="text-gray-700">ID</TableHead>
+                  <TableHead className="text-gray-700">Valor</TableHead>
+                  <TableHead className="text-gray-700">Status</TableHead>
+                  <TableHead className="text-gray-700">Data</TableHead>
+                  <TableHead className="text-gray-700">Usuário</TableHead>
+                  <TableHead className="text-gray-700">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {payments.map((payment) => (
                   <TableRow key={payment.id}>
-                    <TableCell className="font-mono text-sm">
+                    <TableCell className="font-mono text-sm text-gray-900">
                       {payment.id.slice(0, 8)}...
                     </TableCell>
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium text-gray-900">
                       R$ {Number(payment.amount).toFixed(2)}
                     </TableCell>
                     <TableCell>
                       {getStatusBadge(payment.status)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="text-gray-700">
                       {new Date(payment.created_at).toLocaleString('pt-BR')}
                     </TableCell>
-                    <TableCell className="font-mono text-sm">
+                    <TableCell className="font-mono text-sm text-gray-700">
                       {payment.user_id?.slice(0, 8)}...
                     </TableCell>
                     <TableCell>
@@ -187,7 +187,7 @@ export default function PixPaymentManagement() {
                               size="sm"
                               variant="outline"
                               onClick={() => updatePaymentStatus(payment.id, "completed")}
-                              className="text-green-600 hover:text-green-700"
+                              className="text-green-600 hover:text-green-700 border-gray-300"
                             >
                               Confirmar
                             </Button>
@@ -195,7 +195,7 @@ export default function PixPaymentManagement() {
                               size="sm"
                               variant="outline"
                               onClick={() => updatePaymentStatus(payment.id, "failed")}
-                              className="text-red-600 hover:text-red-700"
+                              className="text-red-600 hover:text-red-700 border-gray-300"
                             >
                               Falhar
                             </Button>
