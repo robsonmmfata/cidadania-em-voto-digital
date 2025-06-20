@@ -4,6 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { toast } from "@/components/ui/use-toast";
 import VotingCard from "./VotingCard";
+import PaymentModal from "./PaymentModal";
+import VotingProgress from "./VotingProgress";
+import { useVotingCompletion } from "@/hooks/useVotingCompletion";
 
 interface Election {
   id: string;
@@ -31,23 +34,14 @@ export default function VotingSystem() {
   const [voteStatus, setVoteStatus] = useState<VoteStatus>({});
   const [userVotes, setUserVotes] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  
+  const { hasCompletedAllVotes, totalElections, userVotesCount, progress } = useVotingCompletion();
 
   // Carregar votações em andamento
   useEffect(() => {
     const fetchElections = async () => {
       setLoading(true);
-      
-      // Buscar todas as eleições para debug
-      const { data: allElections, error: allError } = await supabase
-        .from("elections")
-        .select("*");
-      
-      console.log("Todas as eleições no banco:", allElections);
-      console.log("Erro ao buscar eleições:", allError);
-      
-      // Buscar eleições ativas (ajustando a lógica de data)
-      const nowISO = new Date().toISOString();
-      console.log("Data atual:", nowISO);
       
       const { data: electionsData, error } = await supabase
         .from("elections")
@@ -112,6 +106,13 @@ export default function VotingSystem() {
     fetchUserVotes();
   }, [user, elections]);
 
+  // Mostrar modal de pagamento quando completar todas as votações
+  useEffect(() => {
+    if (hasCompletedAllVotes) {
+      setShowPaymentModal(true);
+    }
+  }, [hasCompletedAllVotes]);
+
   const handleVote = async (electionId: string) => {
     if (!user) {
       toast({ title: "Faça login para votar" });
@@ -151,7 +152,7 @@ export default function VotingSystem() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-institutional-blue">Carregando votações...</div>
+        <div className="text-gray-600">Carregando votações...</div>
       </div>
     );
   }
@@ -159,13 +160,10 @@ export default function VotingSystem() {
   if (elections.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="text-institutional-navy mb-4">
+        <div className="text-gray-700 mb-4">
           <h3 className="text-xl font-semibold mb-2">Nenhuma votação ativa</h3>
-          <p className="text-institutional-navy/70">
+          <p className="text-gray-500">
             No momento não há votações em andamento. Volte mais tarde para participar!
-          </p>
-          <p className="text-sm text-red-500 mt-2">
-            Debug: {elections.length} votações encontradas
           </p>
         </div>
       </div>
@@ -175,16 +173,19 @@ export default function VotingSystem() {
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-institutional-navy mb-2">
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">
           Votações em Andamento
         </h2>
-        <p className="text-institutional-navy/70">
+        <p className="text-gray-600">
           Participe das votações ativas e faça sua voz ser ouvida!
         </p>
-        <p className="text-sm text-green-600">
-          {elections.length} votações disponíveis
-        </p>
       </div>
+
+      <VotingProgress 
+        userVotesCount={userVotesCount}
+        totalElections={totalElections}
+        progress={progress}
+      />
 
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
         {elections.map(election => (
@@ -213,6 +214,11 @@ export default function VotingSystem() {
           />
         ))}
       </div>
+
+      <PaymentModal 
+        open={showPaymentModal}
+        onOpenChange={setShowPaymentModal}
+      />
     </div>
   );
 }
