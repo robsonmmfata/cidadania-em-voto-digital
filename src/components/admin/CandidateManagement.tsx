@@ -15,25 +15,24 @@ interface Election {
   name: string;
 }
 
-interface Candidate {
+interface ElectionOption {
   id: string;
-  name: string;
-  description: string | null;
-  photo_url: string | null;
-  election_id: string;
+  label: string;
+  value: string;
+  display_order: number | null;
+  election_id: string | null;
   election?: Election;
-  created_at: string | null;
 }
 
 export default function CandidateManagement() {
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [candidates, setCandidates] = useState<ElectionOption[]>([]);
   const [elections, setElections] = useState<Election[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingCandidate, setEditingCandidate] = useState<Candidate | null>(null);
+  const [editingCandidate, setEditingCandidate] = useState<ElectionOption | null>(null);
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    photo_url: "",
+    label: "",
+    value: "",
+    display_order: "",
     election_id: ""
   });
 
@@ -57,12 +56,12 @@ export default function CandidateManagement() {
 
   const fetchCandidates = async () => {
     const { data, error } = await supabase
-      .from("candidates")
+      .from("election_options")
       .select(`
         *,
         election:elections(id, name)
       `)
-      .order("created_at", { ascending: false });
+      .order("display_order", { ascending: true });
 
     if (error) {
       toast({ title: "Erro ao carregar candidatos", description: error.message });
@@ -74,28 +73,28 @@ export default function CandidateManagement() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.election_id) {
+    if (!formData.label || !formData.value || !formData.election_id) {
       toast({ title: "Preencha todos os campos obrigatórios" });
       return;
     }
 
     const candidateData = {
-      name: formData.name,
-      description: formData.description || null,
-      photo_url: formData.photo_url || null,
+      label: formData.label,
+      value: formData.value,
+      display_order: formData.display_order ? parseInt(formData.display_order) : null,
       election_id: formData.election_id
     };
 
     let error;
     if (editingCandidate) {
       const { error: updateError } = await supabase
-        .from("candidates")
+        .from("election_options")
         .update(candidateData)
         .eq("id", editingCandidate.id);
       error = updateError;
     } else {
       const { error: insertError } = await supabase
-        .from("candidates")
+        .from("election_options")
         .insert([candidateData]);
       error = insertError;
     }
@@ -104,20 +103,20 @@ export default function CandidateManagement() {
       toast({ title: "Erro ao salvar candidato", description: error.message });
     } else {
       toast({ title: editingCandidate ? "Candidato atualizado!" : "Candidato criado!" });
-      setFormData({ name: "", description: "", photo_url: "", election_id: "" });
+      setFormData({ label: "", value: "", display_order: "", election_id: "" });
       setShowForm(false);
       setEditingCandidate(null);
       fetchCandidates();
     }
   };
 
-  const handleEdit = (candidate: Candidate) => {
+  const handleEdit = (candidate: ElectionOption) => {
     setEditingCandidate(candidate);
     setFormData({
-      name: candidate.name,
-      description: candidate.description || "",
-      photo_url: candidate.photo_url || "",
-      election_id: candidate.election_id
+      label: candidate.label,
+      value: candidate.value,
+      display_order: candidate.display_order?.toString() || "",
+      election_id: candidate.election_id || ""
     });
     setShowForm(true);
   };
@@ -126,7 +125,7 @@ export default function CandidateManagement() {
     if (!confirm("Tem certeza que deseja excluir este candidato?")) return;
 
     const { error } = await supabase
-      .from("candidates")
+      .from("election_options")
       .delete()
       .eq("id", id);
 
@@ -139,7 +138,7 @@ export default function CandidateManagement() {
   };
 
   const resetForm = () => {
-    setFormData({ name: "", description: "", photo_url: "", election_id: "" });
+    setFormData({ label: "", value: "", display_order: "", election_id: "" });
     setShowForm(false);
     setEditingCandidate(null);
   };
@@ -188,9 +187,9 @@ export default function CandidateManagement() {
               <User className="h-4 w-4 text-gray-600" />
               <div>
                 <p className="text-2xl font-bold text-gray-900">
-                  {candidates.filter(c => c.photo_url).length}
+                  {candidates.filter(c => c.display_order !== null).length}
                 </p>
-                <p className="text-sm text-gray-600">Com Foto</p>
+                <p className="text-sm text-gray-600">Com Ordem</p>
               </div>
             </div>
           </CardContent>
@@ -207,9 +206,20 @@ export default function CandidateManagement() {
               <div>
                 <label className="block text-sm font-medium mb-1 text-gray-700">Nome do Candidato *</label>
                 <Input
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  value={formData.label}
+                  onChange={(e) => setFormData({ ...formData, label: e.target.value })}
                   placeholder="Ex: João Silva"
+                  required
+                  className="bg-white border-gray-300"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Valor (identificador único) *</label>
+                <Input
+                  value={formData.value}
+                  onChange={(e) => setFormData({ ...formData, value: e.target.value })}
+                  placeholder="Ex: joao-silva"
                   required
                   className="bg-white border-gray-300"
                 />
@@ -235,22 +245,12 @@ export default function CandidateManagement() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Descrição</label>
-                <Textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Descrição do candidato..."
-                  rows={3}
-                  className="bg-white border-gray-300"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">URL da Foto</label>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Ordem de Exibição</label>
                 <Input
-                  value={formData.photo_url}
-                  onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })}
-                  placeholder="https://exemplo.com/foto.jpg"
+                  type="number"
+                  value={formData.display_order}
+                  onChange={(e) => setFormData({ ...formData, display_order: e.target.value })}
+                  placeholder="Ex: 1"
                   className="bg-white border-gray-300"
                 />
               </div>
@@ -280,27 +280,19 @@ export default function CandidateManagement() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-gray-700">Nome</TableHead>
+                  <TableHead className="text-gray-700">Valor</TableHead>
                   <TableHead className="text-gray-700">Votação</TableHead>
-                  <TableHead className="text-gray-700">Descrição</TableHead>
-                  <TableHead className="text-gray-700">Foto</TableHead>
+                  <TableHead className="text-gray-700">Ordem</TableHead>
                   <TableHead className="text-gray-700">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {candidates.map((candidate) => (
                   <TableRow key={candidate.id}>
-                    <TableCell className="font-medium text-gray-900">{candidate.name}</TableCell>
+                    <TableCell className="font-medium text-gray-900">{candidate.label}</TableCell>
+                    <TableCell className="text-gray-700">{candidate.value}</TableCell>
                     <TableCell className="text-gray-700">{candidate.election?.name || "—"}</TableCell>
-                    <TableCell className="text-gray-700">{candidate.description || "—"}</TableCell>
-                    <TableCell className="text-gray-700">
-                      {candidate.photo_url ? (
-                        <img 
-                          src={candidate.photo_url} 
-                          alt={candidate.name}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                      ) : "—"}
-                    </TableCell>
+                    <TableCell className="text-gray-700">{candidate.display_order || "—"}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
                         <Button
