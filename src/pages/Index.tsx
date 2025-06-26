@@ -31,7 +31,7 @@ const Index = () => {
               Urna Eletrônica Cidadã Do Povo
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in">
-              Simulação de votação popular sobre o julgamento dos réus no STF
+              votação popular sobre o julgamento dos réus no STF
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
               <Button
