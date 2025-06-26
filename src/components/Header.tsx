@@ -42,36 +42,29 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
   }
 
   return (
-    <header className="bg-institutional-blue shadow-sm border-b border-institutional-blue sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <Scale className="h-8 w-8 text-white" />
-            <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-white">
-                Urna Cidadã
-              </h1>
-              <p className="text-xs text-blue-100">
-                Simulação de Votação Popular
-              </p>
-            </div>
+            <img src="/favicon.png" alt="Logo Urna Do Povo" className="h-12 w-auto" />
+            Urna Do Povo
           </div>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#caso" className="text-white hover:text-blue-200 transition-colors">
+            <a href="#caso" className="text-gray-700 hover:text-blue-600 transition-colors">
               O Caso
             </a>
-            <a href="#apuracao" className="text-white hover:text-blue-200 transition-colors">
+            <a href="#apuracao" className="text-gray-700 hover:text-blue-600 transition-colors">
               Apuração
             </a>
-            <a href="#como-funciona" className="text-white hover:text-blue-200 transition-colors">
+            <a href="#como-funciona" className="text-gray-700 hover:text-blue-600 transition-colors">
               Como Funciona
             </a>
             {user && (
               <a
                 href={role === "admin" ? "/admin" : "/dashboard"}
-                className="text-white hover:text-blue-200 font-bold transition-colors"
+                className="text-gray-700 hover:text-blue-600 font-bold transition-colors"
               >
                 Minha Dashboard
               </a>
@@ -79,7 +72,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             {user && role === "admin" && (
               <a
                 href="/admin"
-                className="text-white hover:text-yellow-400 font-bold transition-colors"
+                className="text-yellow-600 hover:text-yellow-400 font-bold transition-colors"
               >
                 Admin
               </a>
@@ -88,14 +81,14 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
               <>
                 <Button
                   size="sm"
-                  className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                  className="bg-white/10 hover:bg-blue-100 text-gray-700 font-semibold transition-colors"
                   onClick={() => navigate("/auth")}
                 >
                   Entrar
                 </Button>
                 <Button
                   size="sm"
-                  className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                  className="bg-white/10 hover:bg-blue-100 text-gray-700 font-semibold transition-colors"
                   onClick={() => navigate("/auth")}
                 >
                   Cadastrar
@@ -104,7 +97,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             ) : (
               <Button
                 size="sm"
-                className="bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                className="bg-white/10 hover:bg-blue-100 text-gray-700 font-semibold transition-colors"
                 onClick={() => supabase.auth.signOut().then(() => navigate("/"))}
               >
                 Sair
@@ -115,7 +108,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden text-white hover:bg-institutional-blue/70 transition-colors"
+            className="md:hidden text-gray-700 hover:bg-blue-100 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu className="h-5 w-5" />
@@ -123,29 +116,29 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
         </div>
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-institutional-blue bg-institutional-blue py-4 space-y-2">
+          <div className="md:hidden border-t border-gray-200 bg-white py-4 space-y-2">
             <a 
               href="#caso" 
-              className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
+              className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-100 rounded transition-colors"
             >
               O Caso
             </a>
             <a 
               href="#apuracao" 
-              className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
+              className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-100 rounded transition-colors"
             >
               Apuração
             </a>
             <a 
               href="#como-funciona" 
-              className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
+              className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-100 rounded transition-colors"
             >
               Como Funciona
             </a>
             {user && (
               <a
                 href={role === "admin" ? "/admin" : "/dashboard"}
-                className="block px-4 py-2 text-white hover:text-blue-200 hover:bg-institutional-blue/70 rounded transition-colors"
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-100 rounded transition-colors"
               >
                 Minha Dashboard
               </a>
@@ -153,7 +146,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             {user && role === "admin" && (
               <a
                 href="/admin"
-                className="block px-4 py-2 text-yellow-400 hover:bg-institutional-blue/70 rounded transition-colors font-bold"
+                className="block px-4 py-2 text-yellow-600 hover:text-yellow-400 rounded hover:bg-blue-100 transition-colors font-bold"
               >
                 Admin
               </a>
@@ -161,7 +154,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
             <div className="flex space-x-2 px-4 pt-2">
               <Button
                 size="sm"
-                className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                className="flex-1 bg-white/10 hover:bg-blue-100 text-gray-700 font-semibold transition-colors"
                 onClick={() => {
                   setIsMenuOpen(false);
                   onOpenRegisterModal();
@@ -171,7 +164,7 @@ const Header = ({ onOpenRegisterModal }: HeaderProps) => {
               </Button>
               <Button
                 size="sm"
-                className="flex-1 bg-white/10 hover:bg-institutional-blue/70 text-white font-semibold transition-colors"
+                className="flex-1 bg-white/10 hover:bg-blue-100 text-gray-700 font-semibold transition-colors"
                 onClick={() => {
                   setIsMenuOpen(false);
                   onOpenRegisterModal();

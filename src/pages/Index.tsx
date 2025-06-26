@@ -28,7 +28,7 @@ const Index = () => {
               <Scale className="h-16 w-16 text-white/90" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in text-white">
-              Urna Eletrônica Cidadã
+              Urna Eletrônica Cidadã Do Povo
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 animate-fade-in">
               Simulação de votação popular sobre o julgamento dos réus no STF
